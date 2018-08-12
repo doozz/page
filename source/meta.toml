@@ -25,19 +25,13 @@ cover = "@media/cover.jpg"
 lang = "zh"
 
 
-[[nav]]
-link = "/"
-title = "Home"
-i18n = "home"
-# set nav to active status
-hover = "index"
-blank = false
+
 
 [[nav]]
 link = "/archive.html"
 title = "Archive"
 i18n = "archive"
-hover = "archive"
+hover = "index"
 
 
 [[author]]
