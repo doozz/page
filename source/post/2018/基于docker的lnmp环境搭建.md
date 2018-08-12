@@ -8,9 +8,9 @@ author = "doozz"
 thumb = ""
 tags = ["docker","lnmp"]
 ```
-**\`\`\`toml
-为了方便lnmp环境的搭建，本文章将会从零开始，使用docker搭建一个完整的php-nginx-mysql的工作环境
-\`\`\`**:
+
+为了方便lnmp环境的搭建，本文章将会从零开始，使用docker搭建一个完整的php-nginx-mysql的工作环境。
+
 
 #### Docker
 
