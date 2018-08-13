@@ -2,9 +2,9 @@
 title = "gin使用小结"
 slug = "gin使用小结"
 desc = "gin使用小结"
-date = "2018-08-12 23:11:42"
+date = "2018-07-11 23:11:42"
 update_date = "2018-08-12 23:11:42"
-author = ""
+author = "doozz"
 thumb = ""
 tags = ["go","gin"]
 ```
