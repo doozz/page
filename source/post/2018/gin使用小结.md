@@ -2,7 +2,11 @@
 title = "gin使用小结"
 slug = "gin使用小结"
 desc = "gin使用小结"
+<<<<<<< HEAD
 date = "2018-07-11 23:11:42"
+=======
+date = "2018-07-12 23:11:42"
+>>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
 update_date = "2018-08-12 23:11:42"
 author = "doozz"
 thumb = ""
@@ -15,11 +19,17 @@ tags = ["go","gin"]
 ```shell
 - apis // api接口文件
 --|-- v1 // v1
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
 ------|-- params // 请求参数文件
 ----------|-- user_params.go 
 ------|-- user user文件夹
 ----------|-- user.go userHandle 
 ----------|-- user_test.go 单元测试  
+<<<<<<< HEAD
+=======
 - config // 配置文件
 --|-- api.go // v1
 - router //路由
@@ -96,11 +106,99 @@ func CheckLogin() gin.HandlerFunc {
 			c.Abort()//结束
 		}
 		c.Set("uid", token)
+=======
+- params // 请求参数文件
+>>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
+- config // 配置文件
+--|-- api.go // v1
+- router //路由
+--|--router.go
+- service // main服务目录
+--|-- api // api main.go文件
+------|-- main.go // api main.go文件
+- test 测试文件
+--|--user_test.go
+- utils // 辅助函数文件
+- models // 数据库文件
+```
+
+#### config
+
+```go
+type ApiConf struct {
+	Host string `default:""`
+	Port int    `default:"8080"`
+}
+```
+
+#### main.go
+
+这里使用[multiconfig](https://github.com/koding/multiconfig)包来加载配置。
+
+```go
+func main() {
+	var err error
+	m := multiconfig.New()
+	//获取配置的结构
+	server := new(config.ApiConf)
+	// Check for error
+	err = m.Load(server)
+	if err != nil {
+		log.Fatalf("Load configuration failed. Error: %s\n", err.Error())
+	}
+	// Panic's if there is any error
+	m.MustLoad(server)
+	r := router.GinEngine()
+	r.Run(fmt.Sprintf("%s:%d", server.Host, server.Port))
+}
+```
+
+#### router.go
+
+使用[cors](github.com/gin-contrib/cors)包来做跨域请求策略。CheckLogin验证权限中间件
+
+```go
+func GinEngine() *gin.Engine {
+	gin.SetMode(gin.DebugMode) //debug模式
+	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowOriginFunc:  func(origin string) bool { return true },
+		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+		AllowCredentials: true,
+		AllowHeaders:     []string{"Origin", "Authorization"},
+	}))
+	v1 := router.Group("/v1")
+	{
+		v1.POST("/user/token", user.GetTokenHandler)
+		v1.GET("/user/detail", CheckLogin(), user.GetDetailHandler)
+	}
+	return router
+}
+
+func CheckLogin() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		token := c.GetHeader("Authorization")
+		if token == "" || token != "123abc" {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"msg": "unauthorized",
+			})
+			c.Abort()//结束
+		}
+<<<<<<< HEAD
+		c.Set("uid", token)
+=======
+		//设置上下文 c.Set("id",token)
+>>>>>>> fc31a8ca3c43c8839c225ba09cf088b7b6d46b3f
+>>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
 		c.Next()
 	}
 }
 ```
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
 #### user_params.go
 
 
