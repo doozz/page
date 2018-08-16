@@ -2,11 +2,7 @@
 title = "gin使用小结"
 slug = "gin使用小结"
 desc = "gin使用小结"
-<<<<<<< HEAD
-date = "2018-07-11 23:11:42"
-=======
 date = "2018-07-12 23:11:42"
->>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
 update_date = "2018-08-12 23:11:42"
 author = "doozz"
 thumb = ""
@@ -19,17 +15,11 @@ tags = ["go","gin"]
 ```shell
 - apis // api接口文件
 --|-- v1 // v1
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
 ------|-- params // 请求参数文件
 ----------|-- user_params.go 
 ------|-- user user文件夹
 ----------|-- user.go userHandle 
 ----------|-- user_test.go 单元测试  
-<<<<<<< HEAD
-=======
 - config // 配置文件
 --|-- api.go // v1
 - router //路由
@@ -106,20 +96,6 @@ func CheckLogin() gin.HandlerFunc {
 			c.Abort()//结束
 		}
 		c.Set("uid", token)
-=======
-- params // 请求参数文件
->>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
-- config // 配置文件
---|-- api.go // v1
-- router //路由
---|--router.go
-- service // main服务目录
---|-- api // api main.go文件
-------|-- main.go // api main.go文件
-- test 测试文件
---|--user_test.go
-- utils // 辅助函数文件
-- models // 数据库文件
 ```
 
 #### config
@@ -184,21 +160,14 @@ func CheckLogin() gin.HandlerFunc {
 			})
 			c.Abort()//结束
 		}
-<<<<<<< HEAD
+
 		c.Set("uid", token)
-=======
-		//设置上下文 c.Set("id",token)
->>>>>>> fc31a8ca3c43c8839c225ba09cf088b7b6d46b3f
->>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
 		c.Next()
 	}
 }
 ```
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 17e4892909dc7191c9fd612242a243989b86a12f
+
 #### user_params.go
 
 
