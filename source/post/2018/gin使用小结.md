@@ -15,7 +15,6 @@ tags = ["go","gin"]
 ```shell
 - apis // api接口文件
 --|-- v1 // v1
-<<<<<<< HEAD
 ------|-- params // 请求参数文件
 ----------|-- user_params.go 
 ------|-- user user文件夹
@@ -97,60 +96,78 @@ func CheckLogin() gin.HandlerFunc {
 			c.Abort()//结束
 		}
 		c.Set("uid", token)
-=======
-- params // 请求参数文件
-- config // 配置文件
-- models // 数据库文件
-- service // main服务目录
---|-- api // api main.go文件
-------|-- main.go // api main.go文件
+```
 
-- utils // 辅助函数文件
-- apis // api接口目录
+#### config
+
+```go
+type ApiConf struct {
+	Host string `default:""`
+	Port int    `default:"8080"`
+}
 ```
 
 #### main.go
+
+这里使用[multiconfig](https://github.com/koding/multiconfig)包来加载配置。
+
 ```go
-func main(){
-	gin.SetMode(gin.DebugMode) //debug模式，线上使用release模式
+func main() {
+	var err error
+	m := multiconfig.New()
+	//获取配置的结构
+	server := new(config.ApiConf)
+	// Check for error
+	err = m.Load(server)
+	if err != nil {
+		log.Fatalf("Load configuration failed. Error: %s\n", err.Error())
+	}
+	// Panic's if there is any error
+	m.MustLoad(server)
+	r := router.GinEngine()
+	r.Run(fmt.Sprintf("%s:%d", server.Host, server.Port))
+}
+```
+
+#### router.go
+
+使用[cors](github.com/gin-contrib/cors)包来做跨域请求策略。CheckLogin验证权限中间件
+
+```go
+func GinEngine() *gin.Engine {
+	gin.SetMode(gin.DebugMode) //debug模式
 	router := gin.Default()
-	//跨域请求策略
 	router.Use(cors.New(cors.Config{
-		AllowOriginFunc: func(origin string)bool{return true}
-		AllowMwthods: []string{"GET","POST","OPTIONS"}
-		AllowCredentials: true
-		AllowHeaders:[]string{"Origin","Authorization"}
+		AllowOriginFunc:  func(origin string) bool { return true },
+		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+		AllowCredentials: true,
+		AllowHeaders:     []string{"Origin", "Authorization"},
 	}))
-	//路由组
 	v1 := router.Group("/v1")
 	{
-		v1.GET("/user/token",)
-		v1.POST("/user/msg", CheckToken(),)
+		v1.POST("/user/token", user.GetTokenHandler)
+		v1.GET("/user/detail", CheckLogin(), user.GetDetailHandler)
 	}
-	//启动
-	router.Run(":8000")
+	return router
 }
 
-func CheckToken()gin.HandleFunc {
+func CheckLogin() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.GetHeader("Authorization")
-		if token == "" || token != "helloword" {
-			c.JSON(500,gin.H {
-				"msg":"unauthorized",
+		if token == "" || token != "123abc" {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"msg": "unauthorized",
 			})
-			//返回字符串c.String("200","pong")
-			//重定向 c.Redirect(http.StatusMovedPermanently, "http://baidu.com")
-
-			c.Abort()
+			c.Abort()//结束
 		}
-		//设置上下文 c.Set("id",token)
->>>>>>> fc31a8ca3c43c8839c225ba09cf088b7b6d46b3f
+
+		c.Set("uid", token)
 		c.Next()
 	}
 }
 ```
 
-<<<<<<< HEAD
+
 #### user_params.go
 
 
@@ -226,7 +243,3 @@ func TestGetDetailHandler(t *testing.T) {
 		})
 }
 ```
-
-=======
-#### 
->>>>>>> fc31a8ca3c43c8839c225ba09cf088b7b6d46b3f
