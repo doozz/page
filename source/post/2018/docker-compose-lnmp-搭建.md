@@ -6,7 +6,7 @@ date = "2018-11-19 00:09:07"
 update_date = "2018-11-19 00:09:07"
 author = ""
 thumb = ""
-tags = ["tag"]
+tags = ["docker","docker-compose","lnmp"]
 ```
 
-write you post content in docker-compose-lnmp-搭建.md
+TODO:write you post content in docker-compose-lnmp-搭建.md
