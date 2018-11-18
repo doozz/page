@@ -11,6 +11,11 @@ keyword = "pugo,golang,static,site,generator,一条咸鱼,doozz"
 # print in html <meta>
 desc = "一条咸鱼,doozz"
 
+# build links for feed, sitemap
+domain = "118.24.112.78"
+
+# root path for site# if empty, build as http://{domain}/
+root = "http://118.24.112.78/doo/"
 
 # cover page for homepage
 cover = "@media/cover.jpg"
@@ -18,10 +23,6 @@ cover = "@media/cover.jpg"
 # global language,
 # its used in global posts and themes, unless pages set lang
 lang = "zh"
-
-domain = "118.24.112.78"
-root = "http://118.24.112.78/doo/"
-
 
 [[nav]]
 link = "/"
