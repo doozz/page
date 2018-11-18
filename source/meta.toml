@@ -24,6 +24,9 @@ cover = "@media/cover.jpg"
 # its used in global posts and themes, unless pages set lang
 lang = "zh"
 
+domain = "118.24.112.78"
+root = "http://118.24.112.78/doo/"
+
 
 [[nav]]
 link = "/"
