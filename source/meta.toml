@@ -11,11 +11,6 @@ keyword = "pugo,golang,static,site,generator,一条咸鱼,doozz"
 # print in html <meta>
 desc = "一条咸鱼,doozz"
 
-# build links for feed, sitemap
-domain = "localhost"
-
-# root path for site# if empty, build as http://{domain}/
-root = "http://localhost:9899/"
 
 # cover page for homepage
 cover = "@media/cover.jpg"
