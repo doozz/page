@@ -126,7 +126,7 @@ D:\gopath\bin>protoc --go_out=plugins=grpc:. ./protoc/heardbeat.proto
 
 在原来的目录新加heardbeat文件夹,把heardbeat.pb.go文件放入
 修改start.go
-````go
+````
 var startCmd = &cobra.Command{
 	Use:   "start",
 	Short: "A brief description of your command",
@@ -156,7 +156,7 @@ func init() {
 ````
 
 在heardbeat目录新加service.go文件
-````go
+````
 package heardbeat
 
 import (
