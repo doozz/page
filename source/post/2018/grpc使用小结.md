@@ -15,13 +15,13 @@ tags = ["go", "grpc", "cobra"]
 
 首先安装cobra
 
-```toml
+```
 go get -u github.com/spf13/cobra/cobra
 ```
 
 快速创建一个项目：cobra init [name]
 
-```toml
+```
 D:\gopath\bin>cobra.exe init cli
 Your Cobra application is ready at
 D:\gopath\src\cli
@@ -31,7 +31,7 @@ Add commands to it by running `cobra add [cmdname]`.
 ```
 
 此时会在src文件夹中生成一个cli文件夹
-```toml
+```
 ▾ cli/
     ▾ cmd/
         root.go
@@ -40,27 +40,27 @@ Add commands to it by running `cobra add [cmdname]`.
 ```
 
 使用 cobra add 可以添加自己的命令，接下来我们执行 cobra add start 。此时会在cmd目录下生成start.go文件
-```toml
+```
 cobra add start
 start created at D:\gopath\src\cli\cmd\start.go
 ```
 
 
 接下来我们跑一下main.go 并加上我们刚生成的命令 start
-```toml
+```
 go run main.go start
 Using config file: C:\Users\Administrator\.cli.yaml
 start called
 ```
 可以看到这个配置的目录不在我们的项目文件下，于是我们可以在项目文件夹下创建一个cli.yaml配置文件
-````toml
+````
 cli.yaml:
 test:
   say: hello word
 ````
 
 并且修改start.go
-````go
+````
 var startCmd = &cobra.Command{
 	Use:   "start",
 	Short: "A brief description of your command",
@@ -76,7 +76,7 @@ func init() {
 ````
 
 然后重新执行go run main.go start，只是这次我们要指定config位置
-````toml
+````
 D:\gopath\src\cli>go run main.go start --config ./cli.yaml
 Using config file: ./cli.yaml
 start called
@@ -88,7 +88,7 @@ hello word
 #### gRPC
 
 [gRPC](https://github.com/grpc/grpc.git) 一开始由 google 开发，是一款语言中立、平台中立、开源的远程过程调用(RPC)系统。首先安装gRPC,跟protobuf
-````toml
+````
 go get google.golang.org/grpc
 
 go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
@@ -100,7 +100,7 @@ export PATH=$PATH:$GOPATH/bin
 go build。会在 bin目录生成 protoc-gen-go.exe。有了这两个文件就可以编译.proto文件了
 
 在原来的目录新加docs文件夹，然后编写我们的第一个proto文件 heardbeat.proto
-````toml
+````
 syntax = "proto3";
 package heardbeat;
 
@@ -120,7 +120,7 @@ service HeardbeatService {
 ````
 
 编译proto文件
-````toml
+````
 D:\gopath\bin>protoc --go_out=plugins=grpc:. ./protoc/heardbeat.proto
 ````
 
@@ -181,7 +181,7 @@ func (s *Server) Check(ctx context.Context, req *PingReq) (*PongRep, error) {
 ````
 
 然后启动grpc服务
-````shell
+````
 D:\gopath\src\cli>go run main.go start --config ./cli.yaml
 Using config file: ./cli.yaml
 heardbeat grpc server starting...
@@ -190,7 +190,7 @@ heardbeat grpc server starting...
 接下来我们来编写客户端代码
 
 目录结构
-```toml
+```
 ▾ cli-client/
     ▾ heardbeat/
         heardbeat.pd.go
@@ -230,7 +230,7 @@ func main() {
 ````
 
 然后运行 
-````shell
+````
 D:\gopath\src\cli-client>go run main.go
 pong:"PONG" message:"OK"
 ````
